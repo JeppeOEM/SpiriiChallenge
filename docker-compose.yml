@@ -28,6 +28,7 @@ services:
       - "5433:5432"       # map host 5433 to container 5432
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
 
 volumes:
   pgdata:
