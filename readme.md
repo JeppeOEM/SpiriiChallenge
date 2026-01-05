@@ -20,3 +20,4 @@ curl -H "x-api-key: secretkey" \
 
 ## Improvements
 - I could have created middleware for general error handling, utilizing the next() function of express.
+- It only returns the first 2 repos right now because of rate limiting
