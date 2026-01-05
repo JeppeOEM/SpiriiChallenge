@@ -1,0 +1,31 @@
+services:
+  app:
+    build: .
+    container_name: node_app
+    ports:
+      - "3002:3002"
+    environment:
+      NODE_ENV: production
+      DB_HOST: db
+      DB_PORT: 5433       # use the non-default port here
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: mydatabase
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5433:5432"       # map host 5433 to container 5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

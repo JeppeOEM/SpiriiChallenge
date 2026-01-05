@@ -16,6 +16,8 @@ export class GitRepositoryService {
       console.log(commits);
 
       for (const commit of commits) {
+
+        console.log(commits);
         const stats = await this.repo.getCommitStats(commit.url);
         additions += stats.additions;
         deletions += stats.deletions;
