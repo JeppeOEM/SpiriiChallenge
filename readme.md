@@ -19,4 +19,4 @@ curl -H "x-api-key: secretkey" \
 - Assuming the app needs to be maintainable and loosely coupled, I designed it with a Layered Architecture and Dependency Injection, despite it being more verbose for a small app.
 
 ## Improvements
-- I could have created middleware for general Error handling middleware utilizing the next() function of express.
+- I could have created middleware for general error handling, utilizing the next() function of express.
