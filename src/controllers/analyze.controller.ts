@@ -11,7 +11,6 @@ export class GitRepositoryController {
 
       const result = await this.gitRepositoryService.getGitRepositories(username);
 
-      console.log("Result:", result);
       res.status(200).json(result);
     } catch (err) {
       console.error(err);
