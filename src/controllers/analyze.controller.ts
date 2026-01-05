@@ -7,7 +7,7 @@ export class GitRepositoryController {
   getGitRepositories(req: Request, res: Response): void {
     const username = req.params.username;
     console.log("Username:", username);
-    const msg = this.gitRepositoryService.getGitRepositories(username);
-    res.json(msg);
+    const result = this.gitRepositoryService.getGitRepositories(username);
+    res.json(result);
   }
 }
