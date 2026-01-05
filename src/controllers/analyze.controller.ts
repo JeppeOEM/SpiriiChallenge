@@ -5,7 +5,9 @@ export class GitRepositoryController {
   constructor(private gitRepositoryService: GitRepositoryService) {}
 
   getGitRepositories(req: Request, res: Response): void {
-    const msg = this.gitRepositoryService.getMessage();
+    const username = req.params.username;
+    console.log("Username:", username);
+    const msg = this.gitRepositoryService.getGitRepositories(username);
     res.json(msg);
   }
 }
