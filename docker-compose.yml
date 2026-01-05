@@ -2,6 +2,8 @@ services:
   app:
     build: .
     container_name: node_app
+    env_file:
+      - .env
     ports:
       - "3002:3002"
     environment:
