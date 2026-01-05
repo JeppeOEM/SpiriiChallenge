@@ -10,6 +10,8 @@ export class GitRepositoryService {
     const cached = await this.repo.getStats(username);
     if (cached && (Date.now() - new Date(cached.updated_at!).getTime()) < 24 * 3600 * 1000) {
       console.log("Returning cached data");
+
+      console.log(`Total additions: ${cached.additions}, Total deletions: ${cached.deletions}`);
       return { additions: cached.additions, deletions: cached.deletions };
     }
 
@@ -19,7 +21,7 @@ export class GitRepositoryService {
 
     const repos = await this.repo.getRepos(username);
 
-    for (const repo of repos.slice(0, 2)) { // top 2 repos for speed
+    for (const repo of repos.slice(0, 2)) { // only first 2 for rate limiting
       const commits = await this.repo.getCommits(username, repo.name);
 
       for (const commit of commits) {
@@ -31,7 +33,7 @@ export class GitRepositoryService {
 
     // 3️⃣ Save updated stats to DB
     await this.repo.saveStats(username, additions, deletions);
-
+    console.log("inserting")
     console.log(`Total additions: ${additions}, Total deletions: ${deletions}`);
     return { additions, deletions };
   }
