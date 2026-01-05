@@ -1,15 +1,17 @@
 // repositories/analyze.repository.ts
 import axios, { AxiosInstance } from 'axios';
+import 'dotenv/config';
 
 export class GitRepositoryRepository {
   private axiosInstance: AxiosInstance;
 
-  constructor(token: string) {
+  constructor() {
+    const token = process.env.GITHUB_TOKEN;
     if (!token) {
-      throw new Error('GitHub token is required for authenticated requests');
+      throw new Error('GitHub token is required in .env as GITHUB_TOKEN');
     }
 
-    // Create a single axios instance with authentication headers
+    // Axios instance with authentication headers
     this.axiosInstance = axios.create({
       baseURL: 'https://api.github.com',
       headers: {
