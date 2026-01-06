@@ -1,5 +1,5 @@
 import express from "express";
-import messageRoutes from "./routes/analyze.routes.js";
+import githubRoutes from "./routes/analyze.route.js";
 import { apiKeyMiddleware } from "./middlewares/auth.middleware.js"
 import { errorHandler } from "./middlewares/error.middleware.js";
 import { ApiError } from "./types/api-error.type.js";
@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 app.use(apiKeyMiddleware)
-app.use("/analyze", messageRoutes);
+app.use("/analyze", githubRoutes);
 
 app.get("/test-error", (_req, _res, next) => {
   const message = "Test error triggered manually";
