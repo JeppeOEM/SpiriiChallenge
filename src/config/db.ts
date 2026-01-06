@@ -1,5 +1,3 @@
-
-// src/config/db.ts
 import pkg from "pg";
 const { Pool } = pkg;
 

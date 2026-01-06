@@ -21,3 +21,4 @@ curl -H "x-api-key: secretkey" \
 ## Improvements
 - I could have created middleware for general error handling, utilizing the next() function of express.
 - It only returns the first 2 repos right now because of rate limiting
+- Currently, API errors are typed using a TypeScript intersection type (Error & { statusCode: number }). While this provides development convenience, TypeScript cannot enforce that required properties (like statusCode) are actually initialized at runtime, which can lead to silent bugs (e.g. returning HTTP 200 instead of 500). Planned improvement: migrate to a real ApiError class that extends Error. This will enforce required fields via the constructor, enable reliable instanceof checks, and provide stronger runtime guarantees for consistent and safe error handling.
