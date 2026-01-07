@@ -29,6 +29,8 @@ export class GitRepositoryService {
     const repos = await this.repo.getRepos(username);
 
     for (const repo of repos) {
+      // Handle errors with no commits in a repo
+
       let commits;
 
       try {
@@ -51,12 +53,15 @@ export class GitRepositoryService {
       }
 
       for (const commit of commits) {
+        // Handle errors fetching stats for a commit
+        // Commit without code changes will have additions = 0 and deletions = 0
         try {
           console.log(commit.url);
           const stats = await this.repo.getCommitStats(commit.url);
 
           additions += stats.additions;
           deletions += stats.deletions;
+
         } catch (err: any) {
           const status = err?.response?.status ?? err?.status;
 
